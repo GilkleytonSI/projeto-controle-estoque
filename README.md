@@ -11,7 +11,7 @@ Este projeto é um sistema web para controle de estoque, permitindo a gestão de
 
 ## 🛠 Tecnologias Utilizadas
 
-- **Back-end**: PHP (Orientado a Objetos)
+- **Back-end**: PHP
 - **Front-end**: HTML, CSS, JavaScript, Bootstrap
 - **Banco de Dados**: MySQL
 - **Autenticação**: Sessões PHP

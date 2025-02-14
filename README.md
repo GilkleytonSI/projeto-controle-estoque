@@ -59,8 +59,8 @@ Inicie um servidor local, como XAMPP ou WAMP, e acesse index.php pelo navegador.
 
 ## 📌 Funcionalidades
 
-✅ Login e logout de usuários <br>  
-✅ Painel administrativo com estatísticas <br>  
+✅ Login e logout de usuários  
+✅ Painel administrativo com estatísticas  
 ✅ Gerenciamento de produtos (adicionar, editar, excluir) <br> 
 ✅ Configurações do sistema <br>
 ✅ Interface responsiva com Bootstrap <br>

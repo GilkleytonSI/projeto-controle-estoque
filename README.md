@@ -4,6 +4,11 @@ Este projeto é um sistema web para controle de estoque, permitindo a gestão de
 
 ---
 
+### Interface
+![Tela](https://github.com/GilkleytonSI/Personal-portfolio/blob/main/images/projetos/projeto-estoque.JPG)
+
+
+
 ## 🛠 Tecnologias Utilizadas
 
 - **Back-end**: PHP (Orientado a Objetos)

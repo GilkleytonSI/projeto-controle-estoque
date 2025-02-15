@@ -44,3 +44,29 @@ const editProductModal = document.getElementById('editProductModal');
     }, 3000); // Tempo de exibição: 3 segundos
   }
 
+
+// Passar dados para os modais ao clicar nos botões
+document.addEventListener("DOMContentLoaded", function () {
+  // Modal de Entrada
+  document.querySelectorAll(".entrada-btn").forEach(button => {
+      button.addEventListener("click", function () {
+          let produtoId = this.getAttribute("data-id");
+          let produtoNome = this.getAttribute("data-nome");
+          
+          document.getElementById("entradaProdutoId").value = produtoId;
+          document.getElementById("entradaProdutoNome").textContent = produtoNome;
+      });
+  });
+
+  // Modal de Saída
+  document.querySelectorAll(".saida-btn").forEach(button => {
+      button.addEventListener("click", function () {
+          let produtoId = this.getAttribute("data-id");
+          let produtoNome = this.getAttribute("data-nome");
+
+          document.getElementById("saidaProdutoId").value = produtoId;
+          document.getElementById("saidaProdutoNome").textContent = produtoNome;
+      });
+  });
+});
+

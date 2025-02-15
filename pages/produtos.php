@@ -54,57 +54,76 @@ include '../config/db.php'; // Inclui a conexão com o banco
         </div>
 
         <!-- Tabela de Produtos -->
-        <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Código</th>
-              <th scope="col">Nome</th>
-              <th scope="col">Categoria</th>
-              <th scope="col">Quantidade</th>
-              <th scope="col">Preço</th>
-              <th scope="col" class="text-center">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-          <?php
-            // Consulta para buscar os produtos
-            $query = "SELECT * FROM produtos ORDER BY id DESC";
-            $stmt = $pdo->query($query);
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Código</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">Quantidade</th>
+      <th scope="col">Preço</th>
+      <th scope="col" class="text-center">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php
+    // Consulta para buscar os produtos
+    $query = "SELECT * FROM produtos ORDER BY id DESC";
+    $stmt = $pdo->query($query);
 
-            // Loop para exibir os produtos
-            if ($stmt->rowCount() > 0) {
-                foreach ($stmt as $row) {
-                    echo "<tr>
-                            <td>{$row['codigo']}</td>
-                            <td>{$row['nome']}</td>
-                            <td>{$row['categoria']}</td>
-                            <td>{$row['quantidade']}</td>
-                            <td>R$ " . number_format($row['preco'], 2, ',', '.') . "</td>
-                            <td class='text-center'>
-                              <button class='btn btn-sm btn-warning me-2' data-bs-toggle='modal' 
-                                      data-bs-target='#editProductModal' 
-                                      data-id='{$row['id']}' 
-                                      data-nome='{$row['nome']}' 
-                                      data-categoria='{$row['categoria']}' 
-                                      data-quantidade='{$row['quantidade']}' 
-                                      data-preco='{$row['preco']}'>
-                                  <i class='bi bi-pencil-fill'></i>
-                              </button>
-                              <button class='btn btn-sm btn-danger' data-bs-toggle='modal' 
-                                      data-bs-target='#deleteProductModal' 
-                                      data-id='{$row['id']}' 
-                                      data-nome='{$row['nome']}'>
-                                  <i class='bi bi-trash-fill'></i>
-                              </button>
-                            </td>
-                          </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='6' class='text-center'>Nenhum produto encontrado</td></tr>";
-            }
-            ?>
-          </tbody>
-        </table>
+    // Loop para exibir os produtos
+    if ($stmt->rowCount() > 0) {
+        foreach ($stmt as $row) {
+            echo "<tr>
+                    <td>{$row['codigo']}</td>
+                    <td>{$row['nome']}</td>
+                    <td>{$row['categoria']}</td>
+                    <td>{$row['quantidade']}</td>
+                    <td>R$ " . number_format($row['preco'], 2, ',', '.') . "</td>
+                    <td class='text-center'>
+                      <!-- Botão de Registrar Entrada -->
+                      <button class='btn btn-sm btn-success me-1 entrada-btn' 
+                            data-bs-toggle='modal' 
+                            data-bs-target='#entradaModal' 
+                            data-id='{$row['id']}' 
+                            data-nome='{$row['nome']}'>
+                        <i class='bi bi-box-arrow-in-down'></i> Entrada
+                      </button>
+                      <!-- Botão de Registrar Saída -->
+                      <button class='btn btn-sm btn-danger me-1 saida-btn' 
+                              data-bs-toggle='modal' 
+                              data-bs-target='#saidaModal' 
+                              data-id='{$row['id']}' 
+                              data-nome='{$row['nome']}'>
+                        <i class='bi bi-box-arrow-up'></i> Saída
+                      </button>
+                      <!-- Botão de Editar -->                                 
+                      <button class='btn btn-sm btn-warning me-2' data-bs-toggle='modal' 
+                                data-bs-target='#editProductModal' 
+                                data-id='{$row['id']}' 
+                                data-nome='{$row['nome']}' 
+                                data-categoria='{$row['categoria']}' 
+                                data-quantidade='{$row['quantidade']}' 
+                                data-preco='{$row['preco']}'>
+                            <i class='bi bi-pencil-fill'></i>
+                      </button>
+                      <!-- Botão de Excluir -->
+                      <button class='btn btn-sm btn-danger' data-bs-toggle='modal' 
+                                data-bs-target='#deleteProductModal' 
+                                data-id='{$row['id']}' 
+                                data-nome='{$row['nome']}'>
+                            <i class='bi bi-trash-fill'></i>
+                      </button>
+                    </td>
+                  </tr>";
+        }
+    } else {
+        echo "<tr><td colspan='6' class='text-center'>Nenhum produto encontrado</td></tr>";
+    }
+    ?>
+  </tbody>
+</table>
+
       </div>
     </div>
   </div>
@@ -202,6 +221,60 @@ include '../config/db.php'; // Inclui a conexão com o banco
       </form>
     </div>
   </div>
+</div>
+
+<!-- Modal de Entrada -->
+<div class="modal fade" id="entradaModal" tabindex="-1" aria-labelledby="entradaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="entradaModalLabel">Registrar Entrada de Produto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="../actions/entrada.php" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="produto_id" id="entradaProdutoId">
+                    <p>Produto: <strong id="entradaProdutoNome"></strong></p>
+                    <label for="quantidadeEntrada" class="form-label">Quantidade:</label>
+                    <input type="number" name="quantidade" id="quantidadeEntrada" class="form-control" required min="1">
+
+                    <label for="motivo_entrada">Motivo:</label>
+                    <textarea class="form-control" name="motivo" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Registrar Entrada</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Saída -->
+<div class="modal fade" id="saidaModal" tabindex="-1" aria-labelledby="saidaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="saidaModalLabel">Registrar Saída de Produto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="../actions/saida.php" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="produto_id" id="saidaProdutoId">
+                    <p>Produto: <strong id="saidaProdutoNome"></strong></p>
+                    <label for="quantidadeSaida" class="form-label">Quantidade:</label>
+                    <input type="number" name="quantidade" id="quantidadeSaida" class="form-control" required min="1">
+
+                    <label for="motivo_saida">Motivo:</label>
+                    <textarea class="form-control" name="motivo" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Registrar Saída</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 

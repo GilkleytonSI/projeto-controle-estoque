@@ -62,7 +62,7 @@ $totalProdutos = ($resultProdutos && $resultProdutos->num_rows > 0) ? $resultPro
               <div class="card-header">Quantidade de Entrada</div>
               <div class="card-body">
                 <h5 class="card-title">Exemplo</h5>
-                <p class="card-text fs-3">42</p>
+                <p class="card-text fs-3">35</p>
               </div>
             </div>
           </div>

@@ -1,19 +1,23 @@
-const editProductModal = document.getElementById('editProductModal');
-  editProductModal.addEventListener('show.bs.modal', function (event) {
-    const button = event.relatedTarget; // Botão que abriu o modal
-    const id = button.getAttribute('data-id');
-    const nome = button.getAttribute('data-nome');
-    const categoria = button.getAttribute('data-categoria');
-    const quantidade = button.getAttribute('data-quantidade');
-    const preco = button.getAttribute('data-preco');
+document.addEventListener("DOMContentLoaded", function () {
+  var editProductModal = document.getElementById("editProductModal");
 
-    // Preenche os campos do modal
-    document.getElementById('editProductId').value = id;
-    document.getElementById('editProductName').value = nome;
-    document.getElementById('editProductCategory').value = categoria;
-    document.getElementById('editProductQuantity').value = quantidade;
-    document.getElementById('editProductPrice').value = preco;
+  editProductModal.addEventListener("show.bs.modal", function (event) {
+      var button = event.relatedTarget; // Botão que acionou o modal
+      
+      var id = button.getAttribute("data-id");
+      var nome = button.getAttribute("data-nome");
+      var categoria = button.getAttribute("data-categoria");
+      var quantidade = button.getAttribute("data-quantidade");
+      var preco = button.getAttribute("data-preco");
+
+      // Preenche os campos do modal
+      document.getElementById("editProductId").value = id;
+      document.getElementById("editProductName").value = nome;
+      document.getElementById("nome_categoria").value = categoria;
+      document.getElementById("editProductQuantity").value = quantidade;
+      document.getElementById("editProductPrice").value = preco;
   });
+});
 
 
   const deleteProductModal = document.getElementById('deleteProductModal');

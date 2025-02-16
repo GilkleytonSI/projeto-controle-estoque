@@ -12,6 +12,11 @@
         </a>
       </li>
       <li class="nav-item">
+        <a href="../pages/compras.php" class="nav-link text-white">
+          <i class="bi bi-cart"></i> Compras
+        </a>
+      </li>
+      <li class="nav-item">
         <a href="#" class="nav-link text-white">
           <i class="bi bi-file-earmark-bar-graph me-2"></i> Relatórios
         </a>

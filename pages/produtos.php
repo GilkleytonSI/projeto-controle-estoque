@@ -48,6 +48,10 @@ include '../config/db.php'; // Inclui a conexão com o banco
             </div>
           <?php endif; ?>
 
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCategoria">
+            <i class="bi bi-tags"></i> Cadastrar Categoria
+          </button>
+
           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
             <i class="bi bi-plus-lg me-2"></i> Adicionar Produto
           </button>
@@ -68,7 +72,10 @@ include '../config/db.php'; // Inclui a conexão com o banco
   <tbody>
   <?php
     // Consulta para buscar os produtos
-    $query = "SELECT * FROM produtos ORDER BY id DESC";
+    $query = "SELECT p.id, p.codigo, p.nome, c.nome AS categoria, p.quantidade, p.preco 
+          FROM produtos p
+          LEFT JOIN categorias c ON p.categoria = c.id
+          ORDER BY p.id DESC";
     $stmt = $pdo->query($query);
 
     // Loop para exibir os produtos
@@ -144,7 +151,17 @@ include '../config/db.php'; // Inclui a conexão com o banco
               </div>
               <div class="mb-3">
                 <label for="productCategory" class="form-label">Categoria</label>
-                <input type="text" class="form-control" id="productCategory" name="categoria" required>
+                    <select class="form-control" id="nome_categoria" name="nome_categoria" required>
+                      <option value="">Selecione a Categoria</option>
+                        <?php
+                          require_once '../config/db.php';
+                          $query = "SELECT id, nome FROM categorias";
+                          $stmt = $pdo->query($query);
+                          while ($categoria = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                              echo "<option value='{$categoria['id']}'>{$categoria['nome']}</option>";
+                          }
+                        ?>
+                    </select>
               </div>
               <div class="mb-3">
                 <label for="productQuantity" class="form-label">Quantidade</label>
@@ -181,7 +198,17 @@ include '../config/db.php'; // Inclui a conexão com o banco
           </div>
           <div class="mb-3">
             <label for="editProductCategory" class="form-label">Categoria</label>
-            <input type="text" class="form-control" id="editProductCategory" name="categoria" required>
+            <select class="form-control" id="nome_categoria" name="nome_categoria" required>
+                      <option value="">Selecione a Categoria</option>
+                        <?php
+                          require_once '../config/db.php';
+                          $query = "SELECT id, nome FROM categorias";
+                          $stmt = $pdo->query($query);
+                          while ($categoria = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                              echo "<option value='{$categoria['id']}'>{$categoria['nome']}</option>";
+                          }
+                        ?>
+                    </select>    
           </div>
           <div class="mb-3">
             <label for="editProductQuantity" class="form-label">Quantidade</label>
@@ -273,6 +300,27 @@ include '../config/db.php'; // Inclui a conexão com o banco
                     <button type="submit" class="btn btn-danger">Registrar Saída</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para cadastro de categoria -->
+<div class="modal fade" id="modalCategoria" tabindex="-1" aria-labelledby="modalCategoriaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCategoriaLabel">Cadastrar Nova Categoria</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="../actions/adicionar_categoria.php" method="POST">
+                    <div class="mb-3">
+                        <label for="nome_categoria" class="form-label">Nome da Categoria</label>
+                        <input type="text" class="form-control" id="nome_categoria" name="nome_categoria" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Cadastrar</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

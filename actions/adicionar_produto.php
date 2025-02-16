@@ -1,17 +1,15 @@
 <?php
-include '../config/db.php'; // Inclui a conexão com o banco de dados
+require_once '../config/db.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Recebe e sanitiza os dados do formulário
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-    $categoria = filter_input(INPUT_POST, 'categoria', FILTER_SANITIZE_STRING);
-    $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_VALIDATE_INT);
-    $preco = filter_input(INPUT_POST, 'preco', FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nome = $_POST['nome'];
+    $categoria = $_POST['nome_categoria'];
+    $quantidade = $_POST['quantidade'];
+    $preco = $_POST['preco'];
 
-    // Validação dos campos
-    if (!$nome || !$categoria || !$quantidade || !$preco) {
-        header("Location: ../pages/produtos.php?error=Dados inválidos");
-        exit;
+    if (empty($nome) || empty($categoria) || empty($quantidade) || empty($preco)) {
+        header("Location: ../pages/produtos.php?erro=1");
+        exit();
     }
 
     try {

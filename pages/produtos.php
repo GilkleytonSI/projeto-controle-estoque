@@ -51,6 +51,10 @@ include '../config/db.php'; // Inclui a conexão com o banco
           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCategoria">
             <i class="bi bi-tags"></i> Cadastrar Categoria
           </button>
+          <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalVisualizarCategorias">
+            <i class="bi bi-eye"></i> Visualizar Categorias
+          </button>
+
 
           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
             <i class="bi bi-plus-lg me-2"></i> Adicionar Produto
@@ -324,6 +328,45 @@ include '../config/db.php'; // Inclui a conexão com o banco
         </div>
     </div>
 </div>
+
+<!-- Modal para Visualizar Categorias -->
+<div class="modal fade" id="modalVisualizarCategorias" tabindex="-1" aria-labelledby="modalVisualizarCategoriasLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalVisualizarCategoriasLabel">Categorias Cadastradas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nome das categorias</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        require_once '../config/db.php';
+                        $query = "SELECT id, nome FROM categorias";
+                        $stmt = $pdo->query($query);
+
+                        if ($stmt->rowCount() > 0) {
+                            while ($categoria = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                echo "<tr>
+                                        <td>{$categoria['nome']}</td>
+                                      </tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='2' class='text-center'>Nenhuma categoria encontrada</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
   <!-- Footer -->

@@ -6,7 +6,20 @@ Este projeto é um sistema web para controle de estoque, permitindo a gestão de
 
 ### Interface
 ![Tela](https://github.com/GilkleytonSI/Personal-portfolio/blob/main/images/projetos/projeto-estoque.JPG)
-
+### Tela de produtos
+![Tela](https://github.com/GilkleytonSI/Personal-portfolio/blob/main/images/projetos/projeto-estoque01.JPG)
+### Tela de compras
+![Tela](https://github.com/GilkleytonSI/Personal-portfolio/blob/main/images/projetos/projeto-estoque02.JPG)
+### ADD novas compras
+![Tela](https://github.com/GilkleytonSI/Personal-portfolio/blob/main/images/projetos/projeto-estoque03.JPG)
+### ADD novas categorias
+![Tela](https://github.com/GilkleytonSI/Personal-portfolio/blob/main/images/projetos/projeto-estoque04.JPG)
+### Registrar entradas de produtos
+![Tela](https://github.com/GilkleytonSI/Personal-portfolio/blob/main/images/projetos/projeto-estoque05.JPG)
+### Registrar saida de produtos
+![Tela](https://github.com/GilkleytonSI/Personal-portfolio/blob/main/images/projetos/projeto-estoque06.JPG)
+### Cadastrar produtos
+![Tela](https://github.com/GilkleytonSI/Personal-portfolio/blob/main/images/projetos/projeto-estoque07.JPG)
 
 
 ## 🛠 Tecnologias Utilizadas
